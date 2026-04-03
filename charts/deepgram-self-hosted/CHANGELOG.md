@@ -17,6 +17,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Standardized sample values files to fix drift from the reference configuration (missing resource limits, null `features:` overrides, inconsistent global section, incorrect model list format)
 
+## [0.33.0] - 2026-04-02
+
+### Changed
+
+- Updated default container tags to April 2026 release (`release-260402`). Refer to the [main Deepgram changelog](https://developers.deepgram.com/changelog/self-hosted-changelog#deepgram-self-hosted-april-2026-release-260402) for additional details.
+
 ## [0.32.0] - 2026-03-19
 
 ### Added
@@ -395,7 +401,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Initial implementation of the Helm chart.
 
-[unreleased]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.32.0...HEAD
+[unreleased]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.33.0...HEAD
+[0.33.0]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.32.0...deepgram-self-hosted-0.33.0
 [0.32.0]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.31.0...deepgram-self-hosted-0.32.0
 [0.31.0]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.30.0...deepgram-self-hosted-0.31.0
 [0.30.0]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.29.1...deepgram-self-hosted-0.30.0
