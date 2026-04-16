@@ -6,12 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.34.0] - 2026-04-16
+
 ### Added
 
+- Added Flux STT configuration variants for English (`engine.flux-en.toml`) and Multilingual (`engine.flux-multi.toml`), plus a shared `api.flux.toml`
+  - `engine.flux-multi.toml` sets `model_name = "flux-general-multi"` explicitly to load Multilingual Flux instead of English Flux.
+- Added `engine.flux.model_name` value to select which Flux model to load. Defaults to `flux-general-en`; set to `flux-general-multi` for the Multilingual model.
 - Added `engine.runtimeClassName` value to configure a Kubernetes RuntimeClass on Engine pods
 - Added a 15-minute Time-to-Live (TTL) to the model download pod, configurable via `ttlSecondsAfterFinished`
   - This helps to fix an issue where a lock is held on the PersistentVolume resource, when attempting to delete the Deepgram Kubernetes namespace
 - Added `engine.resources.gpuResourceName` to make the GPU resource name configurable for MIG support
+
+### Changed
+
+- Updated default container tags to April 2026 release (`release-260416`). Refer to the [main Deepgram changelog](https://developers.deepgram.com/changelog/self-hosted-changelog#deepgram-self-hosted-april-2026-release-260416) for additional details.
 
 ### Fixed
 
@@ -401,7 +410,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Initial implementation of the Helm chart.
 
-[unreleased]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.33.0...HEAD
+[unreleased]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.34.0...HEAD
+[0.34.0]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.33.0...deepgram-self-hosted-0.34.0
 [0.33.0]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.32.0...deepgram-self-hosted-0.33.0
 [0.32.0]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.31.0...deepgram-self-hosted-0.32.0
 [0.31.0]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.30.0...deepgram-self-hosted-0.31.0
