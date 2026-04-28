@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Fixed
+
+- Modified t2c & c2a Aura-2 TTS UUIDs throughout repo to be consistent with latest models.
+
 ## [0.34.0] - 2026-04-16
 
 ### Added
