@@ -6,9 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+### Added
+
+- Added `engine.agentOverrides` to support per-engine-type resource overrides when `agent.enabled: true`. Defaults to `gpu: 2` for the `agent-text-to-speech` engine, which is required for Aura-2 TTS. Other engine types continue to use the global `engine.resources` values.
+  - **Breaking change for existing Voice Agent deployments:** Upgrading will cause the `agent-text-to-speech` pod to request 2 GPUs by default. If you are not using Aura-2 and want to keep 1 GPU, add the following to your values:
+    ```yaml
+    engine:
+      agentOverrides:
+        agent-text-to-speech:
+          resources:
+            requests:
+              gpu: 1
+            limits:
+              gpu: 1
+    ```
+
 ### Fixed
 
 - Modified t2c & c2a Aura-2 TTS UUIDs throughout repo to be consistent with latest models.
+- Fixed Voice Agent engine deployments where all three engine types (`agent-speech-to-text`, `agent-text-to-speech`, `agent-end-of-turn`) were stuck in `ContainerCreating` due to missing per-type ConfigMaps. Each engine type now gets its own ConfigMap.
+- Fixed RBAC role for Voice Agent engine pods to grant access to the per-type ConfigMap names created when `agent.enabled: true`.
 
 ## [0.34.0] - 2026-04-16
 
