@@ -6,8 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Unreleased
 
+## [0.35.0] - 2026-04-30
+
 ### Added
 
+- Set `NVIDIA_VISIBLE_DEVICES=all` and `NVIDIA_DRIVER_CAPABILITIES=compute,utility` on Engine pods when GPUs are requested. **Required for `release-260430` and later** — the Engine image no longer bakes these env vars in, and without them the container will fail to start with `libcuda.so.1: cannot open shared object file`. The same env vars were added to all Docker and Podman compose files.
+- **Aura-2 Speed and Pronunciation Controls require an updated voice-pack model file.** Engine `release-260430` adds support for the `speed` parameter and pronunciation controls on Aura-2 English voices. These features are gated on an updated voice-pack (`2025-04-15.4`, UUID `0ec06c9b-0aa0-44d0-a001-3ec57d32229e`). The chart's sample values files (`04-aura-2-setup`, `05-voice-agent-aws`, `06-aura-2-polyglot-setup`) have referenced this UUID since chart `0.34.0`, but customers running an older voice-pack on disk will receive `400 Bad Request` on `speed=*` requests. Refresh the voice-pack model file in your models directory to enable these features — contact your Deepgram representative for the download link.
 - Added `engine.agentOverrides` to support per-engine-type resource overrides when `agent.enabled: true`. Defaults to `gpu: 2` for the `agent-text-to-speech` engine, which is required for Aura-2 TTS. Other engine types continue to use the global `engine.resources` values.
   - **Breaking change for existing Voice Agent deployments:** Upgrading will cause the `agent-text-to-speech` pod to request 2 GPUs by default. If you are not using Aura-2 and want to keep 1 GPU, add the following to your values:
     ```yaml
@@ -20,6 +24,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
             limits:
               gpu: 1
     ```
+
+### Changed
+
+- Updated default container tags to April 2026 release (`release-260430`). Refer to the [main Deepgram changelog](https://developers.deepgram.com/changelog/self-hosted-changelog#deepgram-self-hosted-april-2026-release-260430) for additional details.
 
 ### Fixed
 
@@ -431,7 +439,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Initial implementation of the Helm chart.
 
-[unreleased]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.34.0...HEAD
+[unreleased]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.35.0...HEAD
+[0.35.0]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.34.0...deepgram-self-hosted-0.35.0
 [0.34.0]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.33.0...deepgram-self-hosted-0.34.0
 [0.33.0]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.32.0...deepgram-self-hosted-0.33.0
 [0.32.0]: https://github.com/deepgram/self-hosted-resources/compare/deepgram-self-hosted-0.31.0...deepgram-self-hosted-0.32.0
